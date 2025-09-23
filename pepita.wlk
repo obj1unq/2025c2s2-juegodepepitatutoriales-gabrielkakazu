@@ -44,17 +44,24 @@ object pepita {
 	method irA(nuevaPosicion) {
 		self.validarMover()
 		self.volar(self.position().distance(nuevaPosicion))
-		position = nuevaPosicion
+		const nuevaX = nuevaPosicion.x().max(0).min(12)
+		const nuevaY = nuevaPosicion.y().max(0).min(12)
+		position = game.at(nuevaX, nuevaY)
 	}
 
 	method cansada(){ return energia <= 0}
 
 	method validarMover(){
 		if (self.cansada() or self.conSilvestre())
-			{self.error("no me puedo mover :(")}
+			{self.error("no me puedo mover :(")
+			game.stop()}
 	}
 
 	method conSilvestre() {	return self.position() == silvestre.position()}
+
+	method caer() {
+		position = game.at(position.x(), (position.y()-1).max(0))
+	}
 
 }
 
@@ -70,6 +77,12 @@ object fisica {
 			pepita.irA(pepita.position().down(1))})
 	}
 
+	method gravedad(){
+		game.onTick(800, "caer", {
+			pepita.caer()
+		})
+	}
+
 }
 
 object silvestre {
@@ -80,6 +93,6 @@ object silvestre {
 }
 
 object nido {
-	var property position = game.at(8, 7)
+	var property position = game.at(8, 9)
 	method image() {return "nido.png"}
 }

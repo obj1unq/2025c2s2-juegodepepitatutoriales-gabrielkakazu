@@ -15,6 +15,7 @@ program pepitaGame {
 	game.addVisual(pepita)
 
 	fisica.configTeclas()
+	fisica.gravedad()
 
 	game.start()	
 }
