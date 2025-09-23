@@ -96,3 +96,13 @@ object nido {
 	var property position = game.at(8, 9)
 	method image() {return "nido.png"}
 }
+
+object muro{
+	var property position = game.at(2, 0)
+	method image() {return "muro.png"}
+}
+
+object muro2{
+	var property position = game.at(2, 1)
+	method image() {return "muro.png"}
+}
