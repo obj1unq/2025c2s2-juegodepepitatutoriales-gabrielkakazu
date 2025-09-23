@@ -1,4 +1,5 @@
 import wollok.game.*
+import comidas.*
 object pepita {
 	var energia = 500
 
@@ -63,6 +64,14 @@ object pepita {
 		position = game.at(position.x(), (position.y()-1).max(0))
 	}
 
+	method win() {
+		game.say(self, "¡GANÉ!")
+	}
+
+	method lose() {
+		game.say(self, "¡PERDÍ!")
+	}
+
 }
 
 object fisica {
@@ -82,6 +91,11 @@ object fisica {
 			pepita.caer()
 		})
 	}
+	method materia() {
+		game.whenCollideDo(pepita, {cosa => cosa.encontroCon(pepita)}
+		)
+	}
+	
 
 }
 
@@ -90,19 +104,39 @@ object silvestre {
 		return game.at(pepita.position().x().max(3),0)
 	}
 	method image() {return "silvestre.png"}
+
+	method encontroCon(cosa) {
+		game.say(self, "jaja, te atrapé")
+		game.onTick(2000, "LOSE" , {game.stop()})
+	}
 }
 
 object nido {
 	var property position = game.at(8, 9)
 	method image() {return "nido.png"}
+
+		method encontroCon(cosa) {
+		game.say(self, "GANASTE")
+		game.onTick(2000, "WIN" , {game.stop()})
+	}
 }
 
 object muro{
 	var property position = game.at(2, 0)
 	method image() {return "muro.png"}
+	
+	method encontroCon(cosa) {
+		game.say(self, "jaja, te atrapé")
+		game.removeTickEvent("gravedad")
+	}
 }
 
 object muro2{
 	var property position = game.at(2, 1)
 	method image() {return "muro.png"}
+
+	method encontroCon(cosa) {
+		game.say(self, "jaja, te atrapé")
+		game.removeTickEvent("gravedad")
+	}
 }
