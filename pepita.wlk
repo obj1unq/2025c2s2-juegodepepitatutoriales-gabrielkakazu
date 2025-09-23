@@ -22,11 +22,11 @@ object pepita {
 		position = game.at(nuevaX, nuevaY)
 	}
 
-	method encuentroConAlgo(_posicion) {
+/*	method encuentroConAlgo(_posicion) {
 		if (fisica.hayMuroEn(_posicion)) {
 			self.error("no puedo pasar")
 		}
-	}
+	}*/
 
 	method image() {return 
 		if (self.conSilvestre() or self.cansada()) 
@@ -41,8 +41,7 @@ object pepita {
 	method enNido() {return "pepita-grande.png"}
 
 	method irA(nuevaPosicion) {
-		self.validarMover()
-		self.encuentroConAlgo(nuevaPosicion)
+		self.validarMover(nuevaPosicion)
 		self.volar(self.position().distance(nuevaPosicion))
 		const nuevaX = nuevaPosicion.x().max(0).min(12)
 		const nuevaY = nuevaPosicion.y().max(0).min(12)
@@ -51,10 +50,13 @@ object pepita {
 
 	method cansada(){ return energia <= 0}
 
-	method validarMover(){
+	method validarMover(nuevaPosicion){
 		if (self.cansada() or self.conSilvestre())
 			{self.error("no me puedo mover :(")
-			game.stop()}
+			self.lose()}
+		else if (fisica.hayMuroEn(nuevaPosicion)){
+			self.error("hay un muro, che!")
+		}
 	}
 
 	method conSilvestre() {	return self.position() == silvestre.position()}
@@ -86,10 +88,9 @@ object fisica {
 	}
 
 	method gravedad(){
-		game.onTick(800, "caer", {
-			pepita.caer()
-		})
+		game.onTick(800, "caer", {pepita.caer()})
 	}
+
 	method materia() {
 		game.whenCollideDo(pepita, {cosa => cosa.encontroCon(pepita)}
 		)
@@ -131,7 +132,7 @@ object muro{
 	
 	method encontroCon(cosa) {
 		game.say(self, "jaja, te atrapé")
-		game.removeTickEvent("gravedad")
+		game.removeTickEvent("caer")
 	}
 }
 
@@ -141,6 +142,6 @@ object muro2{
 
 	method encontroCon(cosa) {
 		game.say(self, "jaja, te atrapé")
-		game.removeTickEvent("gravedad")
+		game.removeTickEvent("caer")
 	}
 }
