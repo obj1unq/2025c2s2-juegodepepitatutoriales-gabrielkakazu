@@ -15,19 +15,17 @@ object pepita {
 	var position = game.origin()
 
 	method position() {return position}
-/*		if ((_posicion.x()>0 and _posicion.x()>10) and (
-			(_posicion.y()>0 and _posicion.y()>10))
-		){
-	method position(_posicion) {
-			position = 
-				game.at(_posicion.x().max(0), 
-						_posicion.y().max(0))
-	}*/
 
 	method position(_posicion) {
 		const nuevaX = _posicion.x().max(0).min(12)
 		const nuevaY = _posicion.y().max(0).min(12)
 		position = game.at(nuevaX, nuevaY)
+	}
+
+	method encuentroConAlgo(_posicion) {
+		if (fisica.hayMuroEn(_posicion)) {
+			self.error("no puedo pasar")
+		}
 	}
 
 	method image() {return 
@@ -44,6 +42,7 @@ object pepita {
 
 	method irA(nuevaPosicion) {
 		self.validarMover()
+		self.encuentroConAlgo(nuevaPosicion)
 		self.volar(self.position().distance(nuevaPosicion))
 		const nuevaX = nuevaPosicion.x().max(0).min(12)
 		const nuevaY = nuevaPosicion.y().max(0).min(12)
@@ -95,6 +94,10 @@ object fisica {
 		game.whenCollideDo(pepita, {cosa => cosa.encontroCon(pepita)}
 		)
 	}
+
+	method hayMuroEn(lugar) {
+		return (lugar == muro.position()) or (lugar == muro2.position())
+	}
 	
 
 }
@@ -107,6 +110,7 @@ object silvestre {
 
 	method encontroCon(cosa) {
 		game.say(self, "jaja, te atrapé")
+		cosa.lose()
 		game.onTick(2000, "LOSE" , {game.stop()})
 	}
 }
@@ -116,7 +120,7 @@ object nido {
 	method image() {return "nido.png"}
 
 		method encontroCon(cosa) {
-		game.say(self, "GANASTE")
+		cosa.win()
 		game.onTick(2000, "WIN" , {game.stop()})
 	}
 }
