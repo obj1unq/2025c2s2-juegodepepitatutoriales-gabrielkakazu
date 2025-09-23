@@ -1,24 +1,36 @@
 import wollok.game.*
 object pepita {
-	var energia = 100
+	var energia = 500
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
 	}
 
 	method volar(kms) {
-		energia = energia - 10 - kms 
+		energia = energia - 9 - kms 
 	}
 	
 	method energia() {
 		return energia
 	}
 
-	var property position = game.origin()
+	var position = game.origin()
 
-	method image() {return if (self.position() == silvestre.position()) 
-		{ self.morir()} else if (self.position() == nido.position())
-		{self.enNido()}
+	method position() {return position}
+/*		if ((_posicion.x()>0 and _posicion.x()>10) and (
+			(_posicion.y()>0 and _posicion.y()>10))
+		){*/
+	method position(_posicion) {
+			position = 
+				game.at(_posicion.x(), 
+						_posicion.y())
+	}
+
+	method image() {return 
+		if (self.conSilvestre() or self.cansada()) 
+			{ self.morir()} 
+		else if (self.position() == nido.position())
+			{self.enNido()}
 		else {"pepita.png"}	
 	}
 
@@ -26,23 +38,51 @@ object pepita {
 
 	method enNido() {return "pepita-grande.png"}
 
+	method irA(nuevaPosicion) {
+		self.validarMover()
+		self.volar(self.position().distance(nuevaPosicion))
+		position = nuevaPosicion
+	}
 
+	method cansada(){
+		return energia <= 0
+	}
+
+	method validarMover(){
+		if (self.cansada() or self.conSilvestre())
+			{self.error("no me puedo mover :()")}
+	}
+
+	method conSilvestre() {
+		return self.position() == silvestre.position()
+	}
 }
 
-object nido {
-	var property position = game.at(7, 7)
-	method image() {return "nido.png"}
+object fisica {
+	method configTeclas(){
+		keyboard.left().onPressDo({
+			pepita.irA(pepita.position().left(1))})
+		keyboard.right().onPressDo({
+			pepita.irA(pepita.position().right(1))})
+		keyboard.up().onPressDo({
+			pepita.irA(pepita.position().up(1))})
+		keyboard.down().onPressDo({
+			pepita.irA(pepita.position().down(1))})
+		
+
+	}
 }
 
 object silvestre {
-	var property position = game.at(almuerzo,0)
-
-	const almuerzo = pepita.position().y()
-
+	method position() {
+		return game.at(pepita.position().x().max(3),0)
+	}
 	method image() {
 		return "silvestre.png"
 	}
-
 }
 
-
+object nido {
+	var property position = game.at(8, 7)
+	method image() {return "nido.png"}
+}
