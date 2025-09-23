@@ -4331,3 +4331,4 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":688,"timestamp":"2025-09-23T15:28:57.180Z"}
 {"level":"info","message":"⌛ Validating pepita.wlk","timeElapsed":553,"timestamp":"2025-09-23T15:28:57.888Z"}
 {"exitCode":"SIGHUP","level":"info","message":"👾 Game executed pepitaGameTuto2.pepitaGame on c:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-juegodepepitatutoriales-gabrielkakazu","timeElapsed":1293933,"timestamp":"2025-09-23T15:29:12.656Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mpepitaGameTuto2.pepitaGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-juegodepepitatutoriales-gabrielkakazu\u001b[39m\u001b[23m","ok":true,"timeElapsed":1320,"timestamp":"2025-09-23T15:29:20.992Z"}
