@@ -88,7 +88,9 @@ object fisica {
 	}
 
 	method gravedad(){
-		game.onTick(800, "caer", {pepita.caer()})
+		game.onTick(800, "caer", 
+			{pepita.caer()}
+		)
 	}
 
 	method materia() {
@@ -99,7 +101,8 @@ object fisica {
 	method hayMuroEn(lugar) {
 		return (lugar == muro.position()) or (lugar == muro2.position())
 	}
-	
+
+
 
 }
 
@@ -121,6 +124,7 @@ object nido {
 	method image() {return "nido.png"}
 
 		method encontroCon(cosa) {
+		game.removeTickEvent("caer")
 		cosa.win()
 		game.onTick(2000, "WIN" , {game.stop()})
 	}

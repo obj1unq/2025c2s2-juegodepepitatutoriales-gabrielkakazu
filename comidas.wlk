@@ -1,10 +1,11 @@
 import wollok.game.*
 import pepita.*
 
-object manzana {
+class Manzanas {
 	const base= 5
 	var madurez = 1
-	
+	var property position
+
 	method energiaQueOtorga() {
 		return base * madurez	
 	}
@@ -16,28 +17,36 @@ object manzana {
 
 	method image() {return "manzana.png"}
 
-	method position() {return game.at(2,8)}
+	
 
 	method encontroCon(cosa) {
 		cosa.comer(self)
+		game.say(pepita, "yummy, recupere " + self.energiaQueOtorga() + "de energía")
 	}
 
 }
 
-object alpiste {
+const manzana = new Manzanas(position = game.at(2,8))
+
+class Alpiste {
+	var property position
+	var property peso
 
 	method energiaQueOtorga() {
-		return 20
-	} 
+		return peso
+	}
 
 	method image() {return "alpiste.png"}
 
-	method position() {return game.at(4,3)}
-
 	method encontroCon(cosa) {
 		cosa.comer(self)
+		game.say(pepita, "yummy, recupere " + self.energiaQueOtorga() + "de energía")
 	}
 
 
 }
+
+const alpiste = new Alpiste (position = game.at(4,3), peso = 20)
+
+
 

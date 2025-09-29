@@ -15,9 +15,10 @@ program pepitaGame {
 	game.addVisual(muro2)
     game.addVisual(manzana)
     game.addVisual(alpiste)
-    game.showAttributes(pepita)
+    
     game.addVisual(pepita)
-
+	game.showAttributes(pepita)
+	
 	fisica.configTeclas()
 	fisica.gravedad()
     fisica.materia()
