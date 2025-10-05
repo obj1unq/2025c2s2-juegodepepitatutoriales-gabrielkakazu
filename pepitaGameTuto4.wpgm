@@ -1,7 +1,7 @@
 import wollok.game.*
 import pepita.*
-import comidas.*
 import extras.*
+import comidas.*
 import randomizer.*
 
 program pepitaGame {
@@ -15,8 +15,6 @@ program pepitaGame {
 	game.addVisual(nido)
 	game.addVisual(muro)
 	game.addVisual(muro2)
-    game.addVisual(manzana)
-    game.addVisual(alpiste)
     
     game.addVisual(pepita)
 	game.showAttributes(pepita)
@@ -24,6 +22,8 @@ program pepitaGame {
 	fisica.configTeclas()
 	fisica.gravedad()
     fisica.materia()
+    randomizer.comidaAleatoria()
+
 
 	game.start()	
 }

@@ -1,6 +1,8 @@
 import wollok.game.*
 import pepita.*
 import comidas.*
+import extras.*
+import randomizer.*
 
 program pepitaGame4 {
 	game.title("PepitaTuto2") 	//Valor por defecto "Wollok Game"
@@ -28,11 +30,15 @@ program pepitaGame4 {
         const coordenadaX = 0.randomUpTo(game.width()).truncate(0)
         const coordenadaY = 0.randomUpTo(game.height()).truncate(0)
         const unAlpiste = new Alpiste(position = game.at(coordenadaX, coordenadaY),
-        peso = 0.randomUpTo(100)    )
+        peso = 40.randomUpTo(100).truncate(0)    )
         game.addVisual(unAlpiste)
     }
-    game.onTick(3* 1000, "manzana aleatoria", manzanaRandom )
-    game.onTick(3* 1000, "alpiste aleatorio", alpisteRandom )
+
+
+
+
+
+    
 	
 	fisica.configTeclas()
 	fisica.gravedad()

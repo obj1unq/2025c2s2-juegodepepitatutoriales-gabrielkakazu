@@ -1,5 +1,8 @@
 import wollok.game.*
 import pepita.*
+import comidas.*
+import extras.*
+import randomizer.*
 
 program pepitaGame {
 	game.title("PepitaTuto2") 	//Valor por defecto "Wollok Game"

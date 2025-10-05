@@ -1,5 +1,6 @@
 import wollok.game.*
 import pepita.*
+import randomizer.*
 
 class Manzanas {
 	const base= 5
@@ -26,11 +27,11 @@ class Manzanas {
 
 }
 
-const manzana = new Manzanas(position = game.at(2,8))
+const manzana = new Manzanas(position = randomizer.position())
 
 class Alpiste {
 	var property position
-	var property peso
+	var property peso = 40.randomUpTo(100)
 
 	method energiaQueOtorga() {
 		return peso
@@ -46,7 +47,17 @@ class Alpiste {
 
 }
 
-const alpiste = new Alpiste (position = game.at(4,3), peso = 20)
+const alpiste = new Alpiste (position = randomizer.position())
+
+object comidaRandom {
+	method alpisteOManzana() {
+		return if (0.randomUpTo(1)>= 0.5){
+			 alpiste
+		} else {
+			manzana
+		}
+	}
+}
 
 
 
