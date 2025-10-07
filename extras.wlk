@@ -48,6 +48,9 @@ object silvestre {
 		cosa.lose()
 		game.onTick(2000, "LOSE" , {game.stop()})
 	}
+
+	method esManzana() = false
+	method esAlpiste() = false
 }
 
 object nido {
@@ -59,6 +62,9 @@ object nido {
 		cosa.win()
 		game.onTick(2000, "WIN" , {game.stop()})
 	}
+
+	method esManzana() = false
+	method esAlpiste() = false
 }
 
 object muro{
@@ -69,6 +75,9 @@ object muro{
 		game.say(self, "jaja, te atrapé")
 		game.removeTickEvent("caer")
 	}
+
+	method esManzana() = false
+	method esAlpiste() = false
 }
 
 object muro2{
@@ -79,6 +88,9 @@ object muro2{
 		game.say(self, "jaja, te atrapé")
 		game.removeTickEvent("caer")
 	}
+
+	method esManzana() = false
+	method esAlpiste() = false
 }
 
 

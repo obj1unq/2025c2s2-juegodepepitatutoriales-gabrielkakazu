@@ -4,7 +4,7 @@ import extras.*
 import randomizer.*
 
 object pepita {
-	var energia = 500
+	var energia = 10000
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
@@ -76,6 +76,12 @@ object pepita {
 		game.say(self, "¡PERDÍ!")
 	}
 
+	method esComida(objeto) {
+		return objeto.esManzana() or objeto.esAlpiste()
+	}
+
+	method esManzana() = false
+	method esAlpiste() = false
 
 }
 
