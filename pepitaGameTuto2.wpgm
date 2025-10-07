@@ -1,0 +1,26 @@
+import wollok.game.*
+import pepita.*
+import comidas.*
+import extras.*
+import randomizer.*
+
+program pepitaGame {
+	game.title("PepitaTuto2") 	//Valor por defecto "Wollok Game"
+	game.height(12) 		//valor por defecto 5
+	game.width(12) 			//valor por defecto 5
+	game.cellSize(50) 		//valor por defecto 50
+	//search assets in assets folder, for example, for the background
+
+	//Valor por defecto game.ground("ground.png")
+	game.boardGround("fondo.jpg")
+	game.addVisual(silvestre)
+	game.addVisual(nido)
+	game.addVisual(pepita)
+	game.addVisual(muro)
+	game.addVisual(muro2)
+
+	fisica.configTeclas()
+	fisica.gravedad()
+
+	game.start()	
+}

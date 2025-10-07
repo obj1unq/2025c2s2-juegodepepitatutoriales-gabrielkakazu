@@ -1,0 +1,48 @@
+import wollok.game.*
+import pepita.*
+import comidas.*
+import extras.*
+import randomizer.*
+
+program pepitaGame4 {
+	game.title("PepitaTuto2") 	//Valor por defecto "Wollok Game"
+	game.height(12) 		//valor por defecto 5
+	game.width(12) 			//valor por defecto 5
+	game.cellSize(50) 		//valor por defecto 50
+
+	game.boardGround("fondo2.jpg")
+	game.addVisual(silvestre)
+	game.addVisual(nido)
+	game.addVisual(muro)
+	game.addVisual(muro2)
+   
+    game.addVisual(pepita)
+	game.showAttributes(pepita)
+
+    const manzanaRandom = {
+        const coordenadaX = 0.randomUpTo(game.width()).truncate(0)
+        const coordenadaY = 0.randomUpTo(game.height()).truncate(0)
+        const unaManzana = new Manzanas(position = game.at(coordenadaX, coordenadaY)    )
+        game.addVisual(unaManzana)
+    }
+
+        const alpisteRandom = {
+        const coordenadaX = 0.randomUpTo(game.width()).truncate(0)
+        const coordenadaY = 0.randomUpTo(game.height()).truncate(0)
+        const unAlpiste = new Alpiste(position = game.at(coordenadaX, coordenadaY),
+        peso = 40.randomUpTo(100).truncate(0)    )
+        game.addVisual(unAlpiste)
+    }
+
+
+
+
+
+    
+	
+	fisica.configTeclas()
+	fisica.gravedad()
+    fisica.materia()
+
+	game.start()	
+}

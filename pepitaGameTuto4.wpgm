@@ -1,0 +1,30 @@
+import wollok.game.*
+import pepita.*
+import extras.*
+import comidas.*
+import randomizer.*
+
+program pepitaGame {
+	game.title("PepitaTuto4")
+	game.height(12)
+	game.width(12)
+	game.cellSize(50)
+	game.boardGround("fondo2.jpg")
+	
+	game.addVisual(silvestre)
+	game.addVisual(nido)
+	game.addVisual(muro)
+	game.addVisual(muro2)
+	game.addVisual(pepita)
+	
+	game.showAttributes(pepita)
+	
+	fisica.configTeclas()
+	fisica.gravedad()
+	fisica.materia()
+	
+	// Iniciar aparición de comidas
+	randomizer.comidaAleatoria()
+	
+	game.start()	
+}
